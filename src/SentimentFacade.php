@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Facade;
 class SentimentFacade extends Facade
 {
     protected static function getFacadeAccessor() {
-        return 'sentiment-api';
+        return 'sentiment';
     }
 }
