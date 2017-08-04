@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Dewart\SentimentApi;
-
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

@@ -27,11 +27,13 @@ class SentimentApiServiceProvider
     public function register()
     {
         $this->app->bind('', function ($app) {
-            return new StdClass($app->make(''));
+            return new Sentiment($app);
+        })->alias(Sentiment::class, 'sentiment');
+
+        $this->app->bind(SentimentApi::class, function ($app) {
+            return new SentimentApi($app);
         });
-        $this->app->singleton(SentimentApi::class, function () {
-            return new SentimentApi();
-        });
+
         $this->app->alias(SentimentApi::class, 'sentiment-api');
     }
 }
