@@ -1,23 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: davide
- * Date: 8/4/17
- * Time: 4:22 PM
- */
 
 namespace Dewart\SentimentApi;
-
 
 use phpDocumentor\Reflection\Types\Object_;
 
 class Sentiment {
     private static $objResponse;
     private static $jsonBody;
-    public static function __construct($json)
-    {
+    public static function __construct($json) {
         self::$jsonBody = $json;
-        self::$objResponse = self::parseJson($json);
+        self::parseJson($json);
     }
 
     public static function parseJson($json) {
@@ -29,7 +21,10 @@ class Sentiment {
      * @property int purchase_int
      */
     public static function getIntentions() {
-        return self::$objResponse->intentions;
+        if(property_exists(self::$objResponse, 'intentions')) {
+            return self::$objResponse->intentions;
+        }
+        return null;
     }
 
     /**
@@ -38,7 +33,10 @@ class Sentiment {
      * @property float pos
      */
     public static function getSentiment() {
-        return self::$objResponse->sentiment;
+        if(property_exists(self::$objResponse, 'sentiment')) {
+            return self::$objResponse->sentiment;
+        }
+        return null;
     }
 
     /**
@@ -49,7 +47,10 @@ class Sentiment {
      * NOTE : Categories are only returned if the domain is set.
      */
     public static function getCategories() {
-        return self::$objResponse->categories;
+        if(property_exists(self::$objResponse, 'categories')) {
+            return self::$objResponse->categories;
+        }
+        return null;
     }
 
     /**
@@ -58,7 +59,10 @@ class Sentiment {
      * the k tags encloses a term.
      */
     public static function getText() {
-        return self::$objResponse->text;
+        if(property_exists(self::$objResponse, 'text')) {
+            return self::$objResponse->text;
+        }
+        return null;
     }
 
     /**
@@ -69,7 +73,10 @@ class Sentiment {
      * @property string term
      */
     public static function getTerms() {
-        return self::$objResponse->intentions;
+        if(property_exists(self::$objResponse, 'terms')) {
+            return self::$objResponse->terms;
+        }
+        return null;
     }
 
     /**
@@ -78,6 +85,6 @@ class Sentiment {
      * @return Json jsonBody
      */
     public static function getJson() {
-        return self::$objResponse->intentions;
+        return self::$jsonBody;
     }
 }

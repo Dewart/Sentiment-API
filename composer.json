@@ -7,7 +7,6 @@
             "email": "dewart84@yahoo.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "dewart\\sentimentApi\\" : "src"
