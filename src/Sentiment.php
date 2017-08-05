@@ -7,13 +7,16 @@ use phpDocumentor\Reflection\Types\Object_;
 class Sentiment {
     private static $objResponse;
     private static $jsonBody;
-    public static function __construct($json) {
-        self::$jsonBody = $json;
-        self::parseJson($json);
-    }
 
+    /**
+     * Use this to construct the Object all methods are called statically
+     *
+     * @param $json
+     *
+     */
     public static function parseJson($json) {
-        self::$objResponse = json_decode($json);
+        self::$objResponse = collect(json_decode($json))->flatten()->toArray;
+        self::$jsonBody = $json;
     }
 
     /**

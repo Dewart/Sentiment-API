@@ -32,21 +32,11 @@ class SentimentApi {
                 "intentions" => 1,
                 "sentiment" => 1,
                 "terms" => 1,
-                "text" => $this->review
+                "text" => $this->input
             ]
         ]);
 
         $this->callApi();
-    }
-
-    public function __set($name, $value) {
-        return $this->_properties[$name] = $value;
-    }
-
-    public function __get($name) {
-        return array_has($this->_properties, $name)
-            ? $this->_properties[$name]
-            : null;
     }
 
     private function callApi() {
