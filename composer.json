@@ -1,6 +1,8 @@
 {
     "name": "davide/sentiment-api",
     "description": "getsentiment.io api wrapper",
+    "type" : "library",
+    "license" : "MIT",
     "authors": [
         {
             "name": "David Ewart",
