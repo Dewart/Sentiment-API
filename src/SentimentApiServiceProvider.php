@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: davide
- * Date: 8/4/17
- * Time: 4:00 PM
- */
-
 namespace Dewart\SentimentApi;
-
 
 class SentimentApiServiceProvider
 {
