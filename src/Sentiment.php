@@ -5,27 +5,32 @@ namespace Dewart\SentimentApi;
 use phpDocumentor\Reflection\Types\Object_;
 
 class Sentiment {
-    private static $objResponse;
-    private static $jsonBody;
+    private $jsonBody;
+    private $objResponse;
+
+    private function __construct($obj, $json) {
+        $this->jsonBody = $json;
+        $this->objResponse = $obj;
+    }
 
     /**
-     * Use this to construct the Object all methods are called statically
+     * Use this to construct the Object
      *
      * @param $json
      *
      */
     public static function parseJson($json) {
-        self::$objResponse = collect(json_decode($json))->flatten()->toArray;
-        self::$jsonBody = $json;
+        $objResponse = collect(json_decode($json))->flatten()->first();
+        return new self($objResponse, $json);
     }
 
     /**
      * @property int defection_int
      * @property int purchase_int
      */
-    public static function getIntentions() {
-        if(property_exists(self::$objResponse, 'intentions')) {
-            return self::$objResponse->intentions;
+    public function getIntentions() {
+        if(property_exists($this->objResponse, 'intentions')) {
+            return $this->objResponse->intentions;
         }
         return null;
     }
@@ -35,9 +40,9 @@ class Sentiment {
      * @property float neu
      * @property float pos
      */
-    public static function getSentiment() {
-        if(property_exists(self::$objResponse, 'sentiment')) {
-            return self::$objResponse->sentiment;
+    public function getSentiment() {
+        if(property_exists($this->objResponse, 'sentiment')) {
+            return $this->objResponse->sentiment;
         }
         return null;
     }
@@ -49,9 +54,9 @@ class Sentiment {
      *
      * NOTE : Categories are only returned if the domain is set.
      */
-    public static function getCategories() {
-        if(property_exists(self::$objResponse, 'categories')) {
-            return self::$objResponse->categories;
+    public function getCategories() {
+        if(property_exists($this->objResponse, 'categories')) {
+            return $this->objResponse->categories;
         }
         return null;
     }
@@ -61,9 +66,9 @@ class Sentiment {
      * the doc tag encloses one document, the s tag encloses one sentence, the c tag encloses a clause
      * the k tags encloses a term.
      */
-    public static function getText() {
-        if(property_exists(self::$objResponse, 'text')) {
-            return self::$objResponse->text;
+    public function getText() {
+        if(property_exists($this->objResponse, 'text')) {
+            return $this->objResponse->text;
         }
         return null;
     }
@@ -75,9 +80,9 @@ class Sentiment {
      * @property Object_ sentiment (same as properties for getSentiment)
      * @property string term
      */
-    public static function getTerms() {
-        if(property_exists(self::$objResponse, 'terms')) {
-            return self::$objResponse->terms;
+    public function getTerms() {
+        if(property_exists($this->objResponse, 'terms')) {
+            return $this->objResponse->terms;
         }
         return null;
     }
@@ -87,7 +92,7 @@ class Sentiment {
      *
      * @return Json jsonBody
      */
-    public static function getJson() {
-        return self::$jsonBody;
+    public function getJson() {
+        return $this->jsonBody;
     }
 }

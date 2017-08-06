@@ -35,18 +35,16 @@ class SentimentApi {
                 "text" => $this->input
             ]
         ]);
-
-        $this->callApi();
     }
 
-    private function callApi() {
+    public function callApi() {
         try {
             $response = $this->client->post($this->url);
             $json = $response->getBody()->getContents();
             if($response->getStatusCode() != 200 && empty($json)) {
                 throw new \Exception();
             }
-            Sentiment::parseJson($json);
+            return Sentiment::parseJson($json);
         } catch (RequestException $e) {
             echo $e->getMessage();
         }
